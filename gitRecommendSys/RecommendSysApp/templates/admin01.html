@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/echarts.simple.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <title>LFM系统管理</title>
+    <style type="text/css">
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .top_frame{
+            height:100px;
+            width:100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            overflow:hidden;
+        }
+        .left_frame{
+            width:30%;
+            height:100%;
+            border: 0;
+        }
+        .right_frame{
+            width:69%;
+            height:100%;
+            float:right;
+            border: 0;
+            border-left: 1px solid #aaa;
+        }
+        .div_frame{
+            height: 68%;
+            width: 1000px;
+            margin: 0 auto;
+        }
+        .bottom_frame{
+            height:10px;
+            width:100%;
+            border: 0;
+            border-top: 1px solid #999;
+            margin: 0 auto;
+            padding: 0 auto;
+            position: absolute;
+            bottom: 19px;
+        }
+        .top_img{
+            height: 99%;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            padding: 0;
+            display: hidden;
+        }
+        .bottom_frame p{
+            margin:0;
+            padding: 3px 0;
+            text-align:center;
+            font-size:16px;
+            font-family:"微软雅黑";
+        }
+    </style>
+</head>
+<body>
+    <div class="top_frame" >
+        <img class="top_img" src="/static/image/top.png">
+    </div>
+    <div class="div_frame">
+        <div class="music_wrap" style="width:100%;">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <span>系统管理与评估</span>
+                    <button id="logout" type="button" class="btn btn-default">退出</button>
+                    <span id="username" class="username"></span>
+                </div>
+            </div>
+        </div>
+        <IFRAME class="left_frame" NAME="left_frame" src="left"></IFRAME>
+        <IFRAME class="right_frame" NAME="right_frame" src=""></IFRAME>
+    </div>
+    <div class="bottom_frame">
+        <p>Copyright © 2018 caijianfang@foxmail.com , All Rights Reserved</p>
+    </div>
+</body>
+<script>
+$(document).ready(function(){
+    var username=readLoginInfo();
+    if(username==""){
+        alert("登录信息已过期！");
+        window.location.href="login";
+        return false;
+    }
+    $("#username").text(username);
+
+
+
+})
+$("#logout").click(function(){
+    login_json={};
+    saveCookie("loginInfo",JSON.stringify(login_json));
+    alert("已退出登录！");
+    window.location.href="login";
+})
+
+function readLoginInfo(){   
+    var str=$.cookie("loginInfo");
+    if(str==""||str=="{}"||typeof(str)=="undefined"){
+        return "";
+    }
+    var login_json={};
+    login_json=eval("("+str+")");
+    if('name' in login_json){
+        return login_json.name;
+    }
+    return "";
+}
+
+function saveCookie(name,value){
+    $.cookie(name,value,{ 
+        path:'/',
+    })　
+}
+</script>
+</html>

@@ -1,0 +1,145 @@
+@charset "utf-8";
+/* CSS Document */
+body,div, address, blockquote, iframe, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4, h5, h6, p, pre, table, caption, th, td, form, legend, fieldset, input, button, select, textarea,
+input, button, select, textarea,a,input,span{ margin:0px; padding:0px;font-family:"微软雅黑", Arial, Helvetica, sans-serif;}
+ul,li{list-style:none;}
+a:hover{text-decoration:none;}
+.clear{clear: both;}
+/*header部分样式*/
+
+
+.music_wrap table tbody td{
+	vertical-align: middle;
+}
+.music_wrap table thead tr th:first-child{
+	padding-left: 20px;
+}
+.music_wrap table tbody tr td:first-child{
+	padding-left: 20px;
+}
+.music_wrap .dropdown-menu li i{
+	margin-right: 5px;
+}
+.music_wrap .panel-heading{
+	overflow: hidden;
+}
+.music_wrap .panel-heading span{
+	display: inline-block;
+	height: 34px;
+	line-height: 34px;
+}
+.music_wrap .panel-heading button{
+	float: right;
+}
+.music_wrap .panel-heading .username{
+	float: right;
+	margin-right: 10px;
+}
+.music_wrap{
+	width: 80%;
+	margin: 0 auto;
+}
+
+charset "utf-8";
+/* CSS Document */
+*{       /*--全局初始化--*/
+	margin:0;
+	padding:0;
+	font-family:"微软雅黑";
+}
+img{     /*--图片去边框--*/
+	border:0px;
+}
+a{     /*--超链接去下划线--*/
+	text-decoration:none;
+}
+.login_BG{
+	height:550px;
+	width:1000px;
+	margin:0 auto;
+	position:relative;
+}
+.login_frame{
+	width:360px;
+	/*height:360px;*/
+	padding:20px;
+	margin:100px auto auto;
+	background:#eee;
+	/*position:absolute;
+	right:20px;*/
+	overflow:hidden;
+}
+.login_button{
+	margin:0;
+	float:left;
+	background:#fff;
+	border-bottom:2px solid #fff;
+	padding:15px 0;
+	height:50px;
+	width:160px;
+	text-align:center;
+	font-size:18px;
+}
+#login_button_1{
+	color:#093;
+	border-bottom:2px #093 solid;
+}
+.login_button:hover{
+	border-bottom:2px solid #093;
+	color:#093;
+}
+.login_form{
+	clear:both;
+	border-top:2px solid #ccc;
+	background:#fff;
+	color:#333;
+	padding:20px;
+}
+.login_name,.login_password{
+	/*position:absolute;
+	left:140px;*/
+	width:170px;
+}
+.login_submit{
+	border:none;
+	margin:0 110px;
+	background:#093;
+	font-family:"微软雅黑";
+	font-size:16px;
+	color:#fff;
+	width:100px;
+	height:40px;
+}
+
+.register_BG{
+	height:600px;
+	width:1000px;
+	margin:0 auto;
+	position:relative;
+}
+.register_frame{
+	width:360px;
+	height:410px;
+	padding:20px;
+	margin:100px 0 50px;
+	background:#eee;
+	position:absolute;
+	right:20px;
+	overflow:hidden;
+}
+.register_code{
+	position:absolute;
+	left:140px;
+	width:70px;
+}
+.register_getcode{
+	position:absolute;
+	left:220px;
+	width:100px;
+	height:25px;
+	border:none;
+	background:#CCC;
+}
+.login_a{
+	color:#333;
+}

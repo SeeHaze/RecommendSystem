@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/smartEyes.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/echarts.simple.min.js"></script>
+    <title>运行监控</title>
+    <style type="text/css">
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .state_table{
+            width: 70%;
+            margin: 0 auto;
+            padding: 0;
+            border: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="data_count_box">
+        <div class="count_box count_row count_box1">
+            <h1>推荐系统运行监控</h1>
+            <ul>
+                <li>
+                    <span class="name">计算进度</span>
+                    <div class="praphic_bg"><div class="praphic"></div></div>
+                    <div class="num"><span class="num2" id="num1"></span></div>
+                </li>
+            </ul>
+        </div>
+        <div class="count_box">
+            <br><br>
+            <h1>计算模块连接状态</h1>
+            <ul>
+                <li id="connect_state">
+                    <span class="name">      </span>
+                    <span class="name">状态：</span>
+                    <span class="name">    </span>
+                    <span class="name" id="state_span">    </span>
+                    <span class="name">    </span>
+                    <span class="name" id="time_span">_______</span>
+                </li>
+            </ul>
+            
+            <br>
+            <div id="analysis" style="width:100%;height:190px;background:#fff;"></div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+$(document).ready(function(){
+    setInterval(Connect_state,5000);
+})
+function Connect_state(){
+    $.post({
+        url:"ajax/GetHeartbeat/",
+        data:{
+            "act":"0",
+        },
+        success:function(data){
+            if(data==""){
+                alert("请检查网络连接");
+            }
+            else{
+                var widthArr=eval("("+data+")");
+                if(parseInt(widthArr[0])<10){
+                    $("#state_span").text("运行中");
+                    $('#state_span').css("color","green");
+                    $('#time_span').css("color","green");
+                }else{
+                    $("#state_span").text("连接中断！");
+                    $('#state_span').css("color","red");
+                    $('#time_span').css("color","red");
+                }
+                $("#time_span").text(widthArr[1]);
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+
+    $.post({
+        url:"ajax/Progress/",
+        data:{
+            "act":"0",
+        },
+        success:function(data){
+            if(data==""){
+                alert("请检查网络连接");
+            }
+            else{
+                var widthArr=eval("("+data+")");
+                $("#num1").text(widthArr[0]);
+                $(".count_box1 .praphic").each(function(i){
+                    $(this).width(widthArr[i]);
+                })
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+}
+</script>
+</html>

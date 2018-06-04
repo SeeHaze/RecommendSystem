@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="/static/css/iconfont.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+	<link rel="stylesheet" href="/static/css/smartEyes.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/echarts.simple.min.js"></script>
+	<title>系统评估</title>
+</head>
+<body>
+    <div class="data_count_box">
+        <div class="count_box count_row count_box1">
+            <h1>推荐系统评估</h1>
+            <ul>
+                <li>
+                    <span class="name">准确率</span>
+                    <div class="praphic_bg"><div class="praphic"></div></div>
+                    <div class="num"><span class="num2" id="num1"></span></div>
+                </li>
+                <li>
+                    <span class="name">召回率</span>
+                    <div class="praphic_bg"><div class="praphic"></div></div>
+                    <div class="num"><span class="num2" id="num2"></span></div>
+                </li>
+                <li>
+                    <span class="name">F-Measure</span>
+                    <div class="praphic_bg"><div class="praphic"></div></div>
+                    <div class="num"><span class="num2" id="num3"></span></div>
+                </li>
+            </ul>
+        </div>
+        <div class="count_box">
+            <h1>覆盖率</h1>
+            <div id="analysis" style="width:100%;height:300px;background:#fff;"></div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+$(document).ready(function(){
+    $.post({
+        url:"ajax/sysAssess/",
+        data:{
+            "act":"0",
+        },
+        success:function(data){
+            if(data==""){
+                alert("请检查网络连接");
+            }
+            else{
+                var widthArr=eval("("+data+")");
+                $("#num1").text(widthArr[0]);
+                $("#num2").text(widthArr[1]);
+                $("#num3").text(widthArr[2]);
+                $(".count_box1 .praphic").each(function(i){
+                    $(this).width(widthArr[i]);
+                })
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+    $.post({
+        url:"ajax/getCoverage/",
+        data:{
+            "act":"0",
+        },
+        success:function(data){
+            if(data==""){
+                alert("请检查网络连接");
+            }
+            if(data=="|"){
+                alert("查询失败！");
+            }
+            else{
+                var strs=new Array();
+                strs=data.split("|");
+                var databox=[{name:"覆盖",value:strs[0]},{name:"未覆盖",value:strs[1]}];
+                var myChart = echarts.init(document.getElementById('analysis'));
+                var option = {
+                    title: {
+                        text: '覆盖率'
+                    },
+                    color:['#4f81bb','#bf4f4d'],
+                    tooltip: {},
+                    legend: {
+                        data:['业务']
+                    },
+                    series: [{
+                        name: '业务',
+                        type: 'pie',
+                        radius:'80%',
+                        data: databox,
+                        label:{
+                            position:'inside',
+                            formatter: '{b}: {@score}%'
+                        }
+                    }]
+                };
+                myChart.setOption(option);
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+
+})
+
+    // // 横向柱状统计图
+    // // 传入数据，控制柱状图长度
+    // var widthArr=['72%','23%','35%'];
+    // $(".count_box1 .praphic").each(function(i){
+    //     $(this).width(widthArr[i]);
+    // })
+
+
+    // // 饼状图
+    // // 传入数据
+    // var databox=[{name:"覆盖",value:'65'},{name:"未覆盖",value:'35'}];
+
+    // // 基于准备好的dom，初始化echarts实例
+    // var myChart = echarts.init(document.getElementById('analysis'));
+    // // 指定图表的配置项和数据
+    // var option = {
+    //     title: {
+    //         text: '覆盖率'
+    //     },
+    //     color:['#4f81bb','#bf4f4d'],
+    //     tooltip: {},
+    //     legend: {
+    //         data:['业务']
+    //     },
+    //     series: [{
+    //         name: '业务',
+    //         type: 'pie',
+    //         radius:'80%',
+    //         data: databox,
+    //         label:{
+    //             position:'inside',
+    //             formatter: '{b}: {@score}%'
+    //         }
+    //     }]
+    // };
+    // // 使用刚指定的配置项和数据显示图表。
+    // myChart.setOption(option);
+
+</script>
+</html>

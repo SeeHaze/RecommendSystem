@@ -1,0 +1,167 @@
+
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/index.css">
+    <script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style type="text/css">
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .top_frame{
+            height:100px;
+            width:100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            overflow:hidden;
+        }
+        .bottom_frame{
+            height:30px;
+            width:100%;
+            border: 0;
+            border-top: 1px solid #999;
+            margin: 0 auto;
+            padding: 0 auto;
+            position: absolute;
+            bottom: 0;
+        }
+        .top_img{
+            height: 99%;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            padding: 0;
+            display: hidden;
+        }
+        .bottom_frame p{
+            margin:0 auto;
+            padding: 3px 0;
+            text-align:center;
+            font-size:16px;
+            font-family:"微软雅黑";
+        }
+    </style>
+</head>
+<body>
+
+<div class="top_frame" >
+        <img class="top_img" src="/static/image/top.png">
+    </div>
+  <div class="login_frame"> 
+     <div class="login_button" id="login_button_1">用户登录</div>
+     <a class="login_a" href=""><div class="login_button">用户注册</div></a>
+     <!-- <form class="login_form"> --><div class="login_form"><br /><br />
+        
+        &nbsp;&nbsp;账  号：
+        <input class="login_name" id="login_name" type="text"  maxlength="10" name="usename" id="usename" /><br /><br />
+        
+        &nbsp;&nbsp;密  码：
+        <input class="login_password" id="login_password" type="password" name="password" id="password"/><br /><br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input id="type_admin" type="radio" value="0" name="type">管理员&nbsp;&nbsp; 
+        <input id="type_user" type="radio" value="1" name="type">用户 <br /><br />
+
+
+        <input class="login_submit" type="button" value="登 录" /><br />
+
+    </div>
+     <!-- </form> -->
+  </div>
+</div>
+<div class="bottom_frame">
+        <p>Copyright © 2018 caijianfang@foxmail.com , All Rights Reserved</p>
+</div>
+</body>
+<script>
+$(".login_submit").click(function(){
+    if($("#login_name").val().length==0){
+        alert("账号不能为空！");
+        return false;
+    }
+    if($("#login_password").val().length==0){
+        alert("密码不能为空！");
+        return false;
+    }
+    if($("#login_name").val().indexOf("--") != -1){
+        alert("账号中含有非法字符！");
+        return false;
+    }
+    if($("#login_password").val().indexOf("--") != -1){
+        alert("密码中含有非法字符！");
+        return false;
+    }
+    var name=$("#login_name").val();
+    var password=$("#login_password").val();
+    var type=$('input:radio[name="type"]:checked').val();
+    if(type==null){
+        alert("什么也没选中!");
+        return false;
+    }
+    var login_json={};
+    login_json.name=name;
+    login_json.password=password;
+    login_json.type=type;
+    // if($("#type_admin").attr("checked")) {
+    //     type="0";
+    // }else{
+    //     type="1";
+    // }
+    $.post({
+        url:"ajax/login/",
+        data:{
+            "name":name,
+            "password":password,
+            "type":type
+        },
+        success:function(data){
+            if(data=="0"){
+                saveCookie("loginInfo",JSON.stringify(login_json));
+                window.location.href="admin";
+            }
+            else if(data=="1"){
+                saveCookie("loginInfo",JSON.stringify(login_json));
+                window.location.href="index";
+            }
+            else if(data=="-1"){
+                alert("账号或密码错误！");
+                return false;
+            }
+            else if(data==""){
+                alert("网络连接错误！");
+                return false;
+            }
+            else{
+                alert(data);
+                return false;
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+
+});
+
+function saveCookie(name,value){
+    $.cookie(name,value,{ 
+        path:'/',
+    })　
+}
+
+</script>
+</html>

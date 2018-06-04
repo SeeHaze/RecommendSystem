@@ -1,0 +1,59 @@
+
+.reco_msg_ul ul li{
+	position: relative;
+	padding:10px 10px 10px 50px;
+	background: #fff;
+	overflow: hidden;
+	border-bottom: 1px solid #f1f1f1;
+}
+.reco_msg_ul ul li a{
+	display: flex;
+}
+.reco_msg_ul ul li .name{
+	color: #000;
+	font-size: 14px;
+	margin:4px 0 4px 0;
+}
+.reco_msg_ul ul li .detail{
+	color: #999;
+	font-size: 12px;
+}
+.reco_msg_ul ul li .mui-icon-arrowright{
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	margin-top: -12px;
+	color: #ccc;
+}
+.reco_msg_ul ul li .pic{
+	position: absolute;
+	left: 10px;
+	top: 50%;
+	margin-top: -20px;
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+	border:1px solid #12de8a;
+	border-radius: 60%;
+	padding:5px;
+}
+.reco_msg_ul ul li img{
+	width: 100%;
+	height: 100%;
+}
+.reco_msg_ul ul li .txt{
+	flex: 1;
+}
+.reco_msg_ul ul li .pic.on{
+	position: absolute;
+}
+.reco_msg_ul ul li .pic.on:after{
+	content: '';
+	position: absolute;
+	right: 0px;
+	top:0px;
+	width: 10px;
+	height: 10px;
+	background: #e50000;
+	border-radius: 50%;
+}

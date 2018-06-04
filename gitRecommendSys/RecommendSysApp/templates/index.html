@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/static/css/index.css">
+	<script type="text/javascript" src="/static/js/jquery-1.12.1.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.cookie.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<title></title>
+	<style type="text/css">
+        body, html{
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .top_frame{
+            height:100px;
+            width:100%;
+            margin: 0 auto;
+            padding: 0 auto;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            overflow:hidden;
+        }
+        .bottom_frame{
+            height:30px;
+            width:100%;
+            border: 0;
+            border-top: 1px solid #999;
+            margin: 0 auto;
+            padding: 0 auto;
+            position: absolute;
+            bottom: 0px;
+        }
+        .top_img{
+            height: 99%;
+            width: auto;
+            display: block;
+            margin: 0 auto;
+            padding: 0;
+            display: hidden;
+        }
+        .bottom_frame p{
+            margin:0;
+            padding: 3px 0;
+            text-align:center;
+            font-size:16px;
+            font-family:"微软雅黑";
+        }
+    </style>
+</head>
+<body>
+	<div class="top_frame" >
+        <img class="top_img" src="/static/image/top.png">
+    </div>
+	<div class="music_wrap">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			  <span>每日推荐歌单</span>
+			  <button type="button" id="logout" class="btn btn-default">退出</button>
+			  <span class="username" id="username"></span>
+		  </div>
+		  <table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>歌曲</th>
+					<th>歌手</th>
+					
+					<th>操作</th>
+				</tr>
+			</thead>
+		    <tbody id="tbody">
+		    	<!-- <tr>
+				<td>1</td>
+		    		<td>七里香</td>
+		    		<td>周杰伦</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu" id="56">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>2</td>
+		    		<td>画</td>
+		    		<td>赵雷</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu" id="78">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>3</td>
+		    		<td>生如夏花</td>
+		    		<td>朴树</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>4</td>
+		    		<td>安阳</td>
+		    		<td>痛仰乐队</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>5</td>
+		    		<td>觉醒</td>
+		    		<td>汪峰</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>6</td>
+		    		<td>成都</td>
+		    		<td>赵雷</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>7</td>
+		    		<td>曾经的你</td>
+		    		<td>许巍</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>8</td>
+		    		<td>Young For You</td>
+		    		<td>GALA</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>9</td>
+		    		<td>米店</td>
+		    		<td>李志</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>10</td>
+		    		<td>破冬</td>
+		    		<td>王华峰</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>11</td>
+		    		<td>花房姑娘</td>
+		    		<td>崔健</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>12</td>
+		    		<td>海阔天空</td>
+		    		<td>Beyond</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>13</td>
+		    		<td>晴天</td>
+		    		<td>周杰伦</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr>
+		    	<tr>
+				<td>14</td>
+		    		<td>在木星</td>
+		    		<td>朴树</td>
+		    		
+		    		<td>
+		    			<div class="btn-group">
+		    			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list"></span>
+		    			  </button>
+		    			  <ul class="dropdown-menu">
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart-empty"></i>不感兴趣</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-heart"></i>喜欢</a></li>
+		    			    <li><a href="#"><i class="glyphicon glyphicon-star"></i>收藏</a></li>
+		    			  </ul>
+		    			</div>
+		    		</td>
+		    	</tr> -->
+
+		    </tbody>
+		  </table>
+		</div>
+	</div>
+	<div class="bottom_frame">
+        <p>Copyright © 2018 caijianfang@foxmail.com , All Rights Reserved</p>
+    </div>
+	
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	var username=readLoginInfo();
+	if(username==""){
+		alert("登录信息已过期！");
+		window.location.href="login";
+		return false;
+	}
+	$("#username").text(username);
+	$.post({
+        url:"ajax/resultList/",
+        data:{
+            "name":username,
+        },
+        success:function(data){
+        	if(data=="-1"){
+        		alert("传入参数有误 ！");
+        		return false;
+        	}
+            var obj=eval("("+data+")");
+            for(var i=0;i<obj.length;i++){
+            	var str="";
+            	str+="<tr>";
+				str+="  <td>"+(i+1)+"</td>";
+		    	str+="	<td>"+obj[i].itemname+"</td>";
+		    	str+="	<td>"+obj[i].musician+"</td>";
+		    	str+="	<td>";
+		    	str+="		<div class=\"btn-group\">";
+		    	str+="		  <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"><span class=\"glyphicon glyphicon-list\"></span>";
+		    	str+="		  </button>";
+		    	str+="		  <ul class=\"dropdown-menu\" id=\""+obj[i].id+"\">";
+		    	str+="		    <li><a><i class=\"glyphicon glyphicon-heart-empty\"></i>不喜欢</a></li>";
+		    	str+="		    <li><a><i class=\"glyphicon glyphicon-heart\"></i>喜欢</a></li>";
+		    	str+="		    <li><a><i class=\"glyphicon glyphicon-star\"></i>收藏</a></li>";
+		    	str+="		  </ul>";
+		    	str+="		</div>";
+		    	str+="	</td>";
+		    	str+="</tr>";
+		    	$("#tbody").append(str);
+            }
+        },
+        error:function(err){
+            console.log(err);
+        }
+    });
+	$("#tbody").on("click","tr .dropdown-menu li",function(){
+		// alert($(this).find("a").text());
+		// alert($(this).closest('.dropdown-menu').attr('id'));
+		var act=$(this).find("a").text();
+		var flowid=$(this).closest('.dropdown-menu').attr('id');
+		$.post({
+	        url:"ajax/resultFeedback/",
+	        data:{
+	            "act":act,
+	            "flowid":flowid,
+	        },
+	        success:function(data){
+	        	if(data==""){
+	        		alert("请检查网络连接");
+	        	}
+	        	else{
+	        		alert(data);
+	        	}
+	        },
+	        error:function(err){
+	            console.log(err);
+	        }
+	    });
+	})
+
+});
+
+$("#logout").click(function(){
+	login_json={};
+	saveCookie("loginInfo",JSON.stringify(login_json));
+	alert("已退出登录！");
+	window.location.href="login";
+})
+
+
+function readLoginInfo(){	
+	var str=$.cookie("loginInfo");
+	if(str==""||str=="{}"||typeof(str)=="undefined"){
+		return "";
+	}
+	var login_json={};
+	login_json=eval("("+str+")");
+	if('name' in login_json){
+		return login_json.name;
+	}
+	return "";
+}
+
+function saveCookie(name,value){
+    $.cookie(name,value,{ 
+        path:'/',
+    })　
+}
+</script>
+</html>
